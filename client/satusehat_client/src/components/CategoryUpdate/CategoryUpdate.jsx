@@ -70,7 +70,7 @@ const CategoryUpdate = ({ closeModal, category }) => {
                 <label htmlFor="image" className="form-label">
                   Upload
                   <img
-                    src={image ? URL.createObjectURL(image) : (category?.imgUrl || assets.upload)}
+                    src={`data:image/jpeg;base64,${image ? URL.createObjectURL(image) : (category?.imgUrl || assets.upload)}`}
                     alt=""
                     width={70}
                   />

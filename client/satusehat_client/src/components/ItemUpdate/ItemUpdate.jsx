@@ -77,7 +77,7 @@ const ItemUpdate = ({ closeModal, item }) => {
               <div className="mb-3">
                 <label htmlFor="image" className="form-label">
                   Upload
-                  <img src={image ? URL.createObjectURL(image) : (item?.imgUrl || assets.upload)}
+                  <img src={`data:image/jpeg;base64,${image ? URL.createObjectURL(image) : (item?.imgUrl || assets.upload)}`}
                     alt=""
                     width={70}
                   />

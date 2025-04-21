@@ -97,7 +97,13 @@ const ItemList = () => {
         <tbody>
           {filterItems.map((item) => (
             <tr key={item.itemId}>
-              <td><img src={item.imgUrl} alt={item.name} width="600" height="600" /></td>
+              <td>
+                <img
+                  src={`data:image/jpeg;base64,${item.imgUrl}`}
+                  alt={item.name}
+                  style={{ width: 60, height: 60 }}
+                />
+              </td>
               <td>{item.categoryName}</td>
               <td>{item.name}</td>
               <td>{item.price}</td>

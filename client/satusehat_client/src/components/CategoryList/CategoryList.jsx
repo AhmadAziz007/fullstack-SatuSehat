@@ -101,7 +101,7 @@ const CategoryList = () => {
         <tbody>
           {filteredCategories.map((category) => (
             <tr key={category.categoryId}>
-              <td><img src={category.imgUrl} alt={category.name} width="600" height="600" /></td>
+              <td><img src={`data:image/jpeg;base64,${category.imgUrl}`} alt={category.name} width="60" height="60" /></td>
               <td>{category.name}</td>
               <td>{category.items}</td>
               <td>{category.description}</td>
