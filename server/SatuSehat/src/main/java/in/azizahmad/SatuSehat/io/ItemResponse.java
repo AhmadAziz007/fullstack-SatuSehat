@@ -19,17 +19,9 @@ public class ItemResponse {
     private String categoryId;
     private String categoryName;
     private String description;
-    private String imgUrl;
+    private byte[] imgUrl;
     private Timestamp createdAt;
     private Timestamp updatedAt;
-
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
-    }
 
     public String getItemId() {
         return itemId;

@@ -24,6 +24,24 @@ public class FileUploadServiceImpl implements FileUploadService {
     private final MinioClient minioClient;
 
     @Override
+    public byte[] getFileImage(String imgUrl) {
+        try {
+            String objectName = imgUrl.substring(imgUrl.lastIndexOf("/") + 1);
+            byte[] file = minioClient.getObject(
+                    GetObjectArgs.builder()
+                            .bucket(bucketName)
+                            .object(objectName)
+                            .build()).readAllBytes();
+
+            return file;
+        } catch (Exception e) {
+            throw new ResponseStatusException(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "Error uploading file: " + e.getMessage());
+        }
+    }
+
+    @Override
     public String uploadFile(MultipartFile file) {
         try {
             boolean found = minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucketName).build());

@@ -18,7 +18,7 @@ public class CategoryResponse {
     private String bgColor;
     private Timestamp createdAt;
     private Timestamp updatedAt;
-    private String imgUrl;
+    private byte[] imgUrl;
     private Integer items;
 
     public Integer getItems() {
@@ -77,11 +77,4 @@ public class CategoryResponse {
         this.updatedAt = updatedAt;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
-    }
 }

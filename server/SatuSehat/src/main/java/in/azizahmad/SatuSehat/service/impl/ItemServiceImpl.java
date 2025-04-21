@@ -45,7 +45,7 @@ public class ItemServiceImpl implements ItemService {
                 .name(newItem.getName())
                 .description(newItem.getDescription())
                 .price(newItem.getPrice())
-                .imgUrl(newItem.getImgUrl())
+                .imgUrl(fileUploadService.getFileImage(newItem.getImgUrl()))
                 .categoryName(newItem.getCategory().getName())
                 .createdAt(newItem.getCreatedAt())
                 .updatedAt(newItem.getUpdatedAt())
