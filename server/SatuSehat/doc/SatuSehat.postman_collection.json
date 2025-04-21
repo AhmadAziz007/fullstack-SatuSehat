@@ -1,0 +1,103 @@
+{
+	"info": {
+		"_postman_id": "b94e2dce-5b94-4fcf-ae42-f2b175de4d66",
+		"name": "SatuSehat",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "20727504"
+	},
+	"item": [
+		{
+			"name": "category",
+			"item": [
+				{
+					"name": "add category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Head phones\",\r\n    \"description\": \"all kind of head phones available\",\r\n    \"bgColor\": \"#ffffff\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8081/api/v1.0/categories"
+					},
+					"response": []
+				},
+				{
+					"name": "read category",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "delete category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8081/api/v1.0/categories/"
+					},
+					"response": []
+				},
+				{
+					"name": "update category",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": "http://localhost:8081/api/v1.0/categories/459a1802-3c01-4bb4-b6e0-28822a56ca90"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "items",
+			"item": [
+				{
+					"name": "add items",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "http://localhost:8081/api/v1.0/categories"
+					},
+					"response": []
+				},
+				{
+					"name": "update items",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "http://localhost:8081/api/v1.0/categories"
+					},
+					"response": []
+				},
+				{
+					"name": "read items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8081/api/v1.0/items"
+					},
+					"response": []
+				},
+				{
+					"name": "delete items",
+					"request": {
+						"method": "DELETE",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,31 @@
+.items-container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  height: calc(100vh - 5rem);
+  box-sizing: border-box;
+  background-color: #2C3335;
+}
+
+.items-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+
+.left-column {
+  flex: 1;
+  min-width: 300px;
+}
+
+.right-column {
+  flex: 2;
+  min-width: 300px;
+}
+
+@media (max-width: 768px) {
+  .items-container {
+    flex-direction: column;
+  }
+}
