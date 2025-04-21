@@ -87,26 +87,20 @@ public class ItemServiceImpl implements ItemService {
         ItemEntity existingItem = itemRepository.findByItemId(itemId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item not found"));
 
-        // Update gambar jika ada file baru
         String newImgUrl = existingItem.getImgUrl();
         if (file != null && !file.isEmpty()) {
-            // Hapus gambar lama
             fileUploadService.deleteFile(existingItem.getImgUrl());
-            // Upload gambar baru
             newImgUrl = fileUploadService.uploadFile(file);
         }
 
-        // Update category jika berubah
         CategoryEntity newCategory = existingItem.getCategory();
         if (!request.getCategoryId().equals(existingItem.getCategory().getCategoryId())) {
             newCategory = categoryRepository.findByCategoryId(request.getCategoryId())
                     .orElseThrow(() -> new RuntimeException("Category not found"));
         }
-
-        // Update data item
         ItemEntity updatedItem = ItemEntity.builder()
                 .id(existingItem.getId())
-                .itemId(existingItem.getItemId()) // Pertahankan ID yang sama
+                .itemId(existingItem.getItemId())
                 .name(request.getName())
                 .price(request.getPrice())
                 .description(request.getDescription())
