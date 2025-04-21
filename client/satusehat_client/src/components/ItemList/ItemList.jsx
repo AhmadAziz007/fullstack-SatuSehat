@@ -1,12 +1,12 @@
 import { useContext, useState } from "react";
 import { AppContext } from "../../context/AppContext";
-import { deleteItems } from "../../service/ItemsService";
+import { deleteItems } from "../../service/ItemService";
 import toast from "react-hot-toast";
 import ItemForm from "../ItemForm/ItemForm";
-import ItemsUpdate from "../ItemUpdate/ItemUpdate";
+import ItemUpdate from "../ItemUpdate/ItemUpdate";
 
 const ItemList = () => {
-  const { itemsData, setItemsData } = useContext(AppContext);
+  const { items, setItems } = useContext(AppContext);
   const [selectedItem, setSelectedItem] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [isModalAdd, setIsModalAdd] = useState(false);
@@ -20,8 +20,8 @@ const ItemList = () => {
     setIsModalAdd(false);
   }
 
-  const openModalUpdate = (items) => {
-    setSelectedItem(items);
+  const openModalUpdate = (item) => {
+    setSelectedItem(item);
     setModalUpdate(true);
   }
 
@@ -29,13 +29,13 @@ const ItemList = () => {
     setModalUpdate(false);
   }
 
-  const filterItems = itemsData.filter(items => items.name && items.name.toLowerCase().includes(searchTerm.toLowerCase()));
+  const filterItems = items.filter(items => items.name && items.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
   const deleteByItemsId = async (itemId) => {
     try {
       const response = await deleteItems(itemId);
       if (response.status >= 200 && response.status < 300) {
-        setItemsData(prevItems =>
+        setItems(prevItems =>
           prevItems.filter(item => item.itemId !== itemId)
         );
         toast.success("Item deleted successfully");
@@ -130,9 +130,9 @@ const ItemList = () => {
                 <button type="button" className="btn-close" onClick={closeModalUpdate}></button>
               </div>
               <div className="modal-body">
-                <ItemsUpdate
+                <ItemUpdate
                   closeModal={closeModalUpdate}
-                  items={selectedItem}
+                  item={selectedItem}
                 />
               </div>
             </div>

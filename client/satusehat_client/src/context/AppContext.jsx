@@ -1,12 +1,12 @@
 import { createContext, useEffect, useState } from 'react';
 import { fetchCategories } from '../service/CategoryService';
-import { fetchItems } from '../service/ItemsService';
+import { fetchItems } from '../service/ItemService';
 
 export const AppContext = createContext(null);
 
 export const AppContextProvider = (props) => {
   const [categories, setCategories] = useState([]);
-  const [itemsData, setItemsData] = useState([]);
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
     const loadData = async () => {
@@ -14,7 +14,7 @@ export const AppContextProvider = (props) => {
         const response = await fetchCategories();
         const itemResponse = await fetchItems();
         setCategories(response.data);
-        setItemsData(itemResponse.data)
+        setItems(itemResponse.data)
       } catch (error) {
         console.error("Failed to fetch categories", error);
       }
@@ -25,8 +25,8 @@ export const AppContextProvider = (props) => {
   const contextValue = {
     categories,
     setCategories,
-    itemsData,
-    setItemsData
+    items,
+    setItems
   };
 
   return (

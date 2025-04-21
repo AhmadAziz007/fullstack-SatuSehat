@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { AppContext } from "../../context/AppContext";
 import toast from "react-hot-toast";
-import { addItems } from "../../service/ItemsService";
+import { addItems } from "../../service/ItemService";
 import { assets } from "../../assets/assets";
 
 const ItemForm = ({ closeModal }) => {

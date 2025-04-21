@@ -4,10 +4,10 @@ export const addItems = async (items) => {
   return await axios.post(`http://localhost:8081/api/v1.0/items`, items);
 }
 
-export const updateItems = async (itemsId, itemsData) => {
+export const updateItem = async (itemId, itemData) => {
   return await axios.put(
-    `http://localhost:8081/api/v1.0/items/${itemsId}`,
-    itemsData,
+    `http://localhost:8081/api/v1.0/items/${itemId}`,
+    itemData,
     {
       headers: {
         'Content-Type': 'multipart/form-data'

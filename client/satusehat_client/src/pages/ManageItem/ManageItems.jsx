@@ -1,4 +1,3 @@
-import ItemForm from '../../components/ItemForm/ItemForm.jsx';
 import ItemList from '../../components/ItemList/ItemList.jsx';
 import './ManageItems.css';
 

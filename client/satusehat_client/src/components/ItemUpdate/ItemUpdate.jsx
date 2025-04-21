@@ -1,20 +1,21 @@
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/AppContext";
 import toast from "react-hot-toast";
-import { updateItems } from "../../service/ItemsService";
+import { updateItem } from "../../service/ItemService";
 import { assets } from "../../assets/assets";
 
-const ItemsUpdate = ({ closeModal, items }) => {
-  const { categories, itemsData, setItemsData } = useContext(AppContext);
+const ItemUpdate = ({ closeModal, item }) => {
+  const { categories, items, setItems } = useContext(AppContext);
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState(false);
+
   const [data, setData] = useState({
-    name: items?.name || "",
-    description: items?.description || "",
-    price: items?.price || "",
-    categoryId: items.categoryId || ""
+    name: item?.name || "",
+    description: item?.description || "",
+    price: item?.price || "",
+    categoryId: item.categoryId || ""
   });
-  const [itemsId, setItemsId] = useState(items?.itemsid || "");
+  const [itemId, setItemId] = useState(item?.itemid || "");
 
   const onChangehandler = (e) => {
     const value = e.target.value;
@@ -23,40 +24,45 @@ const ItemsUpdate = ({ closeModal, items }) => {
   };
 
   useEffect(() => {
-    if (items) {
+    if (item) {
       setData({
-        name: items.name,
-        description: items.description,
-        price: items.price,
-        categoryId: items.categoryId
+        name: item.name,
+        description: item.description,
+        price: item.price,
+        categoryId: item.categoryId
       });
-      setItemsId(items.itemsId);
+      setItemId(item.itemId);
     }
-  }, [items]);
+  }, [item]);
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    const fromData = new FormData();
-    fromData.append('item', JSON.stringify(data));
+    const formData = new FormData();
+    formData.append('item', JSON.stringify({
+      name: data.name,
+      description: data.description,
+      price: Number(data.price),
+      categoryId: data.categoryId
+    }));
     if (image) {
-      fromData.append('file', image);
+      formData.append('file', image);
     }
 
     try {
-      const response = await updateItems(itemsId, fromData);
+      const response = await updateItem(itemId, formData);
       if (response.status === 200) {
-        const updateItems = itemsData.map(item =>
-          item.itemsId === itemsId ? response.data : item
+        const updateItem = items.map(item =>
+          item.itemId === itemId ? { ...item, ...response.data } : item
         );
-        setItemsData(updateItems);
-        toast.success("Items updated successfully");
+        setItems(updateItem);
+        toast.success("Item updated successfully");
         closeModal();
       }
     } catch (err) {
       console.error(err);
-      toast.error(err.response?.data?.message || "Error updating items");
+      toast.error(err.response?.data?.message || "Error updating item");
     } finally {
       setLoading(false);
     }
@@ -71,7 +77,7 @@ const ItemsUpdate = ({ closeModal, items }) => {
               <div className="mb-3">
                 <label htmlFor="image" className="form-label">
                   Upload
-                  <img src={image ? URL.createObjectURL(image) : (assets.imgUrl || assets.upload)}
+                  <img src={image ? URL.createObjectURL(image) : (item?.imgUrl || assets.upload)}
                     alt=""
                     width={70}
                   />
@@ -136,4 +142,4 @@ const ItemsUpdate = ({ closeModal, items }) => {
   );
 };
 
-export default ItemsUpdate;
+export default ItemUpdate;
